@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:reddit_clone/features/auth/screens/login_screem.dart';
+import 'package:reddit_clone/features/auth/screens/login_screen.dart.dart';
 import 'package:reddit_clone/theme/palette.dart';
 
 import 'firebase_options.dart';

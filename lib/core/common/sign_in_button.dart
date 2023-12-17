@@ -7,8 +7,8 @@ import 'package:reddit_clone/theme/palette.dart';
 class SignInButton extends ConsumerWidget {
   const SignInButton({super.key});
 
-  void signInWithGoogle(WidgetRef ref) {
-    ref.read(authControllerProvider).signInWithGoogle();
+  void signInWithGoogle(BuildContext context, WidgetRef ref) {
+    ref.read(authControllerProvider.notifier).signInWithGoogle(context);
   }
 
   @override
@@ -23,7 +23,7 @@ class SignInButton extends ConsumerWidget {
             borderRadius: BorderRadius.circular(20),
           ),
         ),
-        onPressed: () => signInWithGoogle(ref),
+        onPressed: () => signInWithGoogle(context, ref),
         icon: Image.asset(
           Constants.googleLogoPath,
           width: 35,
