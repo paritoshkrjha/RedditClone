@@ -7,7 +7,8 @@ import 'package:reddit_clone/core/providers/firebase_providers.dart';
 import 'package:reddit_clone/core/type_defs.dart';
 import 'package:reddit_clone/models/community_model.dart';
 
-final communityRepositoryProvider = Provider((ref) => CommunityRepository(firestore: ref.watch(firestoreProvider)));
+final communityRepositoryProvider = Provider(
+    (ref) => CommunityRepository(firestore: ref.watch(firestoreProvider)));
 
 class CommunityRepository {
   final FirebaseFirestore _firestore;
@@ -27,6 +28,19 @@ class CommunityRepository {
     } catch (e) {
       return left(Failure(e.toString()));
     }
+  }
+
+  Stream<List<Community>> getUserCommunities(String uid) {
+    return _communities
+        .where('members', arrayContains: uid)
+        .snapshots()
+        .map((event) {
+      List<Community> communities = [];
+      for (var doc in event.docs) {
+        communities.add(Community.fromMap(doc.data() as Map<String, dynamic>));
+      }
+      return communities;
+    });
   }
 
   CollectionReference get _communities =>
